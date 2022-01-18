@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&family=Roboto+Mono:wght@300;400&display=swap');
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+button {
+  font-size: calc(10px + 2vmin);
+}
+
+.mono-nice {
+  font-family: 'Roboto Mono', monospace;
+}
+
+.inline-flex-center-imp {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.flex-center-imp {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.inline-flex-center-reg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.flex-center-reg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-h-reg {
+  display: flex;
+  align-items: center;
+}
+
+.hoverableLight {
+  transition: all 0.1s ease-out;
+}
+.hoverableLight:hover {
+  background-color: hsla(209deg, 100%, 92%, 0.13) !important;
+  /* border: 1px solid hsla(209deg, 100%, 32%, 0.2); */
+}

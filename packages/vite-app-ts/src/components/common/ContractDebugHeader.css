@@ -1,0 +1,12 @@
+.DebugHeader {
+  --bgCol: hsla(0, 0%, 50%, 0.1);
+  background: var(--bgCol);
+}
+.hoverableDebugHeader {
+  transition: all 0.1s ease-out;
+  cursor: pointer;
+  background: transparent;
+}
+.hoverableDebugHeader:hover {
+  background: var(--bgCol);
+}
