@@ -191,24 +191,29 @@ For **contract state**, like "purpose", contract owner, etc. the frontend uses t
 
 This is what we do in ```<YourContract/>```
 
-SCREENSHOT
+![Screenshot 2022-01-18 at 22 32 48](https://user-images.githubusercontent.com/32189942/150031270-9c2fc86b-10fc-47a9-9a3f-45c0fb87e12b.png)
 
 
 ### 🤓 Very optional nerdy side quest for TS-enthusiasts
-> At the moment you don't get strong typing and autocomplete for ```YourContract```, like you do with ```YourContractFactory```. At least not out of the box. 
+> At the moment you don't get strong typing and autocomplete when attempting to (read/write) interact with ```YourContract```, like you do with ```YourContractFactory```. At least not out of the box. 
 > 
-> Strong typing is only available out-of-the box for contracts deployed by ```yarn deploy```. In our factory setup you deploy the factory via a script, but all ```YourContract``` instances are created by the factory contract when users interact with it.
+> Strong typing is only available out-of-the box for contracts deployed by ```yarn deploy```. In our factory setup you deploy the factory via a script, but all ```YourContract``` instances are **created by the factory contract** when users interact with it.
 > 
 > You can still **obtain strong typing** by doing the following: 
 > - include YourContract in the deployment script in `packages/hardhat-ts/deploy`. The code for that is commented out. Uncomment it. This will deploy one instance of ```YourContract``` when the deploy script runs.
 > 
-> - Uncomment the related code in ```packages/vite-app-ts/src/config/contractConnectorConfig.ts``` . You will easily identify it 😉
+> - Uncomment the related code in ```packages/vite-app-ts/src/config/contractConnectorConfig.ts``` . You will easily identify that code 😉
 > 
 > - Run ```yarn deploy --reset```
 > 
-> You'll have an instance of ```YourContract``` deployed somewhere, but your App won't show it in any way. However, your IDE will tell you that ```YourContract``` has a ```purpose```, a ```setPurpose``` etc.
+> You'll have an instance of ```YourContract``` deployed somewhere, but your App won't show it in any way. However, your IDE will now know you that ```YourContract``` has a ```purpose```, a ```setPurpose``` etc.
 
-SCREENSHOT
+Observe how yourContractRaw is now typed more precisely:
+
+![Screenshot 2022-01-18 at 23 00 27](https://user-images.githubusercontent.com/32189942/150031716-fa652735-5ab0-4f11-bef9-90fa7dcfb827.png)
+
+![Screenshot 2022-01-18 at 23 00 51](https://user-images.githubusercontent.com/32189942/150031706-03bd9f3f-f765-4202-ae26-6226fb64d5f8.png)
+
 
 > Don't forget to put the comments back in when you deploy your dApp to mainnet. Or you will **totally waste gas ⛽️ 💰 ** on that lonely YourContract instance!
 > 
@@ -216,7 +221,7 @@ SCREENSHOT
 
 
 ## 👨🏻‍💻 🤓  Knitty Gritty Aside - "manually" created contract objects
-You may skip this section and tackle Challenge 1 below, if you're eager to code some more. Just make sure to return here some time later. 
+You may skip this section and tackle Challenge 1 below if you're eager to code some more. Just make sure to return here some time later. 
 
 Understanding this is crucial if you're serious about building factory pattern dApps, so you'll need to do it anyway. But no pressure right now 😎 🧉
 
@@ -234,7 +239,7 @@ Understanding this is crucial if you're serious about building factory pattern d
 > ```
 >
 > 
-> For the yourContract object we make use of **```injectableAbis```**, which are configured to give you the abi for ```YourContract```. With that equipped, we create a "raw" ```BaseContract``` which we then connect to a signer. 
+> For the ```yourContract``` object we make use of **```injectableAbis```**, which are configured to give you the abi for ```YourContract```. With that equipped, we create a "raw" ```BaseContract``` which we then connect to a signer. 
 > 
 > Here is a **simplified** version of the code:
 > 
@@ -309,7 +314,10 @@ Find the code that displays this data. Uncomment that.
 
 Now you should see owner information in the contracts list of the master view.
 
-📝 🤓 Observe that this time we **didn't connect any signer**, since we only had to read from the contract. Also, we **didn't specify a fourth argument to useContractReader** since we don't expect the owner to update while this React component is displayed.
+📝 🤓 Observe that this time we **didn't connect any signer**, since we only had to read from the contract. Also, we **didn't specify a fourth argument to useContractReader**. That one is with options on how the value should be updated. But we don't expect the owner to change while this React component is displayed, so we provide no explicit update options. When no updateOptions are provided, the default behaviour of the hook is to only update once every 100 blocks, which is acceptable in a situation like ours. 
+
+> #### 🧞‍♀️ Side quest - Make this perfect! 💯
+> Find out how to useEventListener() such that it only updates if the owner actually changes. Perfect the code. Can you test if it works?
 
 ### 👩‍💻 😍 🧑‍💻 **Recognize** my contract
 > Owner addresses are quite hard to read. In the contracts list, let's **mark** items which belong to **the current user** so they may be identified more easily.
@@ -318,7 +326,7 @@ Go to the code inside the ```<ContractItem/>``` component. Find the commented co
 
 You should now see contract items like this:
 
-SCREENSHOT
+![Screenshot 2022-01-19 at 00 28 35](https://user-images.githubusercontent.com/32189942/150033710-37a9b108-e8c5-439e-9ada-bc2659f56cc9.png)
 
 ☑️ Test the functionality by creating contracts from an incognito window. Compare the views of different users.
 
