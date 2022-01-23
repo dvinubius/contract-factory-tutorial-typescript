@@ -50,27 +50,32 @@ Prerequisites: [Node](https://nodejs.org/en/download/) plus [Yarn](https://class
 > clone/fork 🏗 scaffold-eth:
 
 ```bash
-git clone https://github.com/austintgriffith/scaffold-eth.git
+git clone https://github.com/dvinubius/contract-factory-tutorial-typescript.git
 ```
 
-> install and start your 👷‍ Hardhat chain:
+> install:
 
 ```bash
-yarn install
+yarn
+```
+
+> in a new terminal window, start a local hardhat node:
+
+```bash
 yarn chain
 ```
 
-> in a second terminal window, start your 📱 frontend:
+> deploy your contracts:
+
+```bash
+yarn contracts:build
+yarn deploy
+```
+
+> in a new terminal window, start your frontend:
 
 ```bash
 yarn start
-```
-
-> in a third terminal window, 🛰 deploy your contract:
-
-```bash
-yarn compile
-yarn deploy
 ```
 
 🌍 You need an RPC key for production deployments/Apps, create an [Alchemy](https://www.alchemy.com/) account and replace the value of `ALCHEMY_KEY = xxx` in `packages/react-app/src/constants.js`
